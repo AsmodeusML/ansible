@@ -1,6 +1,6 @@
  ---
 - name: Install Portainer CE
-  hosts: your_hosts
+  hosts: all
   become: true
   tasks:
     - name: Deploy Portainer container
