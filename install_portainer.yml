@@ -1,0 +1,19 @@
+ ---
+- name: Install Portainer CE
+  hosts: your_hosts
+  become: true
+  tasks:
+    - name: Deploy Portainer container
+      community.docker.docker_container:
+        name: portainer
+        image: portainer/portainer-ee:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8000:8000" # Web interface port
+          - "9443:9443"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock # Mount the Docker socket
+          - /opt/docker/portainer:/data # Mount the named volume for persistence
+        env:         
+          - TRUSTED_ORIGINS=portainer.asmodeus.com.de
