@@ -1,6 +1,6 @@
 ---
-- name: Install OpenZFS
-  hosts: all
+- name: Build OpenZFS
+  hosts: localhost
   become: true
   tasks:
     - name: Install build dependencies
@@ -65,8 +65,8 @@
         chdir: "/usr/src/zfs-2.4.1"
         removes: /usr/src/openzfs-zfs-dracut_*.deb
 
-- name: Install all local .deb packages from a folder
-  hosts: all
+- name: Install OpenZFS
+  hosts: localhost
   become: true  # Required for package installation
   tasks:
     - name: Find all .deb files in the directory
