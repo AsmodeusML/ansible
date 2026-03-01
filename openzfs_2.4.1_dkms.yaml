@@ -1,0 +1,78 @@
+- name: Install build dependencies
+  ansible.builtin.apt:
+    name:
+      - alien 
+      - autoconf 
+      - automake 
+      - build-essential 
+      - debhelper-compat 
+      - dh-dkms 
+      - dh-python 
+      - dkms 
+      - fakeroot 
+      - gawk 
+      - libaio-dev 
+      - libattr1-dev 
+      - libblkid-dev 
+      - libcurl4-openssl-dev 
+      - libelf-dev 
+      - libffi-dev 
+      - libpam0g-dev 
+      - libssl-dev 
+      - libtirpc-dev 
+      - libtool 
+      - libudev-dev 
+      - linux-headers-generic 
+      - po-debconf 
+      - python3 
+      - python3-all-dev 
+      - python3-cffi 
+      - python3-dev 
+      - python3-packaging 
+      - python3-setuptools 
+      - python3-sphinx 
+      - uuid-dev 
+      - zlib1g-dev
+    state: present
+    update_cache: yes
+    
+- name: Extract OpenZFS tarball
+  ansible.builtin.unarchive:
+    src: "http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-2.4.1.tar.gz"
+    dest: "/usr/src"
+    remote_src: yes
+
+- name: Run configure
+  ansible.builtin.shell:
+    cmd: "./configure"
+    chdir: "/usr/src/zfs-2.4.1"
+
+- name: Build and install zfsutils
+  ansible.builtin.shell:
+    cmd: "make native-deb-utils"
+    chdir: "/usr/src/zfs-2.4.1"
+
+- name: Build and install zfsutils
+  ansible.builtin.shell:
+    cmd: "rm ../openzfs-zfs-dracut_*.deb"
+    chdir: "/usr/src/zfs-2.4.1"
+
+- name: Install all local .deb packages from a folder
+  hosts: all
+  become: true  # Required for package installation
+
+  tasks:
+    - name: Find all .deb files in the directory
+      ansible.builtin.find:
+        paths: /usr/src  # Replace with the actual path to your folder
+        patterns: "*.deb"
+        recurse: false
+      register: deb_files
+
+    - name: Install found .deb packages
+      ansible.builtin.apt:
+        deb: "{{ item.path }}"
+        state: present
+        state: fixed
+      loop: "{{ deb_files.files }}"
+      register: install_results
