@@ -53,13 +53,13 @@
         chdir: "/usr/src/zfs-2.4.1"
         creates: /usr/src/zfs-2.4.1/Makefile
 
-    - name: Build and install zfsutils
+    - name: Build zfsutils
       ansible.builtin.command:
         cmd: "make native-deb-utils"
         chdir: "/usr/src/zfs-2.4.1"
         creates: ../*.deb
 
-    - name: Build and install zfsutils
+    - name: Build zfsutils
       ansible.builtin.command:
         cmd: "rm ../openzfs-zfs-dracut_*.deb"
         chdir: "/usr/src/zfs-2.4.1"
