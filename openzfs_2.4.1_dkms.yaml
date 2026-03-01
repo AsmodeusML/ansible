@@ -43,7 +43,7 @@
 
     - name: Extract OpenZFS tarball
       ansible.builtin.unarchive:
-        src: "http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-2.4.1.tar.gz"
+        src: "https://github.com/openzfs/zfs/releases/download/zfs-2.4.1/zfs-2.4.1.tar.gz"
         dest: "/usr/src"
         remote_src: true
 
