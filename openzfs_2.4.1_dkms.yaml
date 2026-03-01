@@ -80,6 +80,6 @@
     - name: Install found .deb packages
       ansible.builtin.apt:
         deb: "{{ item.path }}"
-        state: fixed
+        state: present
       loop: "{{ deb_files.files }}"
       register: install_results
