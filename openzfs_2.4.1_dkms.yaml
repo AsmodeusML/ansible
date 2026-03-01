@@ -64,7 +64,7 @@
       ansible.builtin.command:
         cmd: "rm ../openzfs-zfs-dracut_*.deb"
         chdir: "/usr/src/zfs-2.4.1"
-        removes: /usr/src/openzfs-zfs-dracut_*.deb
+        removes: ../openzfs-zfs-dracut_*.deb
 
 - name: Install OpenZFS
   hosts: localhost
