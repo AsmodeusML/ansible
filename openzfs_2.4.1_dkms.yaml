@@ -62,7 +62,7 @@
 
     - name: Build zfsutils
       ansible.builtin.command:
-        cmd: "rm ../openzfs-zfs-dracut_*.deb"
+        cmd: "rm ../openzfs-zfs-dracut_*"
         chdir: "/usr/src/zfs-2.4.1"
         removes: ../openzfs-zfs-dracut_*
 
