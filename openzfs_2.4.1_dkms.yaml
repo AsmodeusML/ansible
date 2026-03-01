@@ -61,10 +61,10 @@
         creates: ../*.deb
 
     - name: Build zfsutils
-      ansible.builtin.command:
-        cmd: "rm ../openzfs-zfs-dracut_*"
+      ansible.builtin.shell:
+        cmd: "rm ../openzfs-zfs-dracut_*.deb"
         chdir: "/usr/src/zfs-2.4.1"
-        removes: ../openzfs-zfs-dracut_*
+        removes: ../openzfs-zfs-dracut_*.deb
 
 - name: Install OpenZFS
   hosts: localhost
