@@ -46,6 +46,7 @@
         src: https://github.com/openzfs/zfs/releases/download/zfs-2.4.1/zfs-2.4.1.tar.gz
         dest: /usr/src
         remote_src: yes
+        creates: /usr/src/zfs-2.4.1
 
     - name: Run configure
       ansible.builtin.command:
