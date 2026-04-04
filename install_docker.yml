@@ -19,7 +19,7 @@
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/ubuntu/gpg
         dest: /etc/apt/keyrings/docker.asc
-        state: present
+        mode: 644
 
     - name: Set up Docker stable repository
       ansible.builtin.apt_repository:
