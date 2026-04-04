@@ -23,7 +23,7 @@
 
     - name: Set up Docker stable repository
       ansible.builtin.deb822_repository:
-        name: docker.sources
+        name: docker
         allow_insecure: true
         types: deb
         uris: https://download.docker.com/linux/ubuntu
