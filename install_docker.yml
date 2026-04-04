@@ -29,7 +29,7 @@
         suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
         components: stable
         architectures: $(dpkg --print-architecture)
-        signed-by: /etc/apt/keyrings/docker.asc
+        signed_by: /etc/apt/keyrings/docker.asc
         state: present
 
     - name: Update APT package index after adding Docker repository
