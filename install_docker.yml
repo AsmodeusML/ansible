@@ -22,15 +22,9 @@
         mode: 644
 
     - name: Set up Docker stable repository
-      ansible.builtin.deb822_repository:
-        name: docker
-        allow_insecure: true
-        types: deb
-        uris: https://download.docker.com/linux/ubuntu
-        suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
-        components: stable
-        architectures: $(dpkg --print-architecture)
-        signed_by: /etc/apt/keyrings/docker.asc
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        filename: docker.sources
         state: present
 
     - name: Update APT package index after adding Docker repository
