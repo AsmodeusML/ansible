@@ -1,6 +1,7 @@
 ---
-- hosts: localhost
-  become: yes
+- name: Install Docker Engine
+  hosts: localhost
+  become: true
 
   tasks:
     - name: Update and upgrade APT packages
